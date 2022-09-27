@@ -4,12 +4,13 @@ import { SingInComponent } from './sing-in/sing-in.component';
 import { SingUpComponent } from './sing-up/sing-up.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'sing-in', pathMatch: 'full' },
   { path: 'sing-in', component: SingInComponent},
   { path: 'sing-up', component: SingUpComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AuthRoutingModule { }
