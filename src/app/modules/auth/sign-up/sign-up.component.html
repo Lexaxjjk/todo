@@ -1,0 +1,69 @@
+<div class="content">
+  <form class="sign-up-form" [formGroup]="signUpForm">
+    <h1>Выполните регистрацию</h1>
+    <div>
+      <mat-form-field class="fn-input sign-up-input" appearance="fill">
+        <mat-label>Имя</mat-label>
+        <input matInput formControlName="firstName">
+        <mat-error *ngIf="signUpForm.get('firstName').hasError('required')">
+          Это поле <strong>Обязательно!</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field class="ln-input sign-up-input" appearance="fill">
+        <mat-label>Фамилия</mat-label>
+        <input matInput formControlName="lastName">
+        <mat-error *ngIf="signUpForm.get('lastName').hasError('required')">
+          Это поле <strong> Обязательно! </strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field class="email-input sign-up-input" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Email">
+        <mat-error *ngIf="!signUpForm.get('email').hasError('required') && signUpForm.get('email').hasError('email')">
+          Неправильний формат email
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('email').hasError('required')">
+          Email адрес <strong>Обязателен!</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div>
+      <mat-form-field class="pass-input sign-up-input" appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <input [type]="hide.pass ? 'password' : 'text'" matInput formControlName="pass" placeholder="password">
+        <button mat-icon-button matSuffix (click)="hide.pass= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide.pass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="signUpForm.get('pass').hasError('minlength') || signUpForm.get('confPass').hasError('required')">
+          Пароль должен содержать не менее <strong> 6 </strong> символов! 
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="conf-pass-input sign-up-input" appearance="fill">
+        <mat-label>Повторите пароль</mat-label>
+        <input [type]="hide.confPass ? 'password' : 'text'" matInput formControlName="confPass" placeholder="password">
+        <button mat-icon-button matSuffix (click)="hide.confPass= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide.confPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="confPassIsRequired">
+          Пароль должен содержать не менее <strong> 6 </strong> символов! 
+        </mat-error>
+        <mat-error *ngIf="signUpForm.get('confPass').hasError('custom')">
+          Пароли не совпадают!
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="action">
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="signUpForm.invalid">Регистрация</button>
+    <button mat-raised-button color="warn" (click)="clear()">Очистить</button>
+  </div>
+</div>

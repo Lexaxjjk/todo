@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutsModule } from './modules/layouts/layouts.module';
-import { TestBodyModule } from './modules/test-body/test-body.module';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +16,6 @@ import { TestBodyModule } from './modules/test-body/test-body.module';
     BrowserModule,
     AppRoutingModule,
     LayoutsModule,
-    TestBodyModule,
     CommonModule,
     BrowserAnimationsModule,
   ],

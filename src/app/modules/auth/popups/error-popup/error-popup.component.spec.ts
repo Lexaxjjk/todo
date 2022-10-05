@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestBodyComponent } from './test-body.component';
+import { ErrorPopupComponent } from './error-popup.component';
 
-describe('TestBodyComponent', () => {
-  let component: TestBodyComponent;
-  let fixture: ComponentFixture<TestBodyComponent>;
+describe('ErrorPopupComponent', () => {
+  let component: ErrorPopupComponent;
+  let fixture: ComponentFixture<ErrorPopupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestBodyComponent ]
+      declarations: [ ErrorPopupComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TestBodyComponent);
+    fixture = TestBed.createComponent(ErrorPopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
