@@ -1,0 +1,31 @@
+<div class="task-container">
+  <div class="id">
+    <p>{{ index + 1 }}</p>
+  </div>
+  <div class="description">
+    <p>{{task.text}}</p>
+  </div>
+  <div class="start-date">
+    <p>{{task.startDate | date: 'dd/MM/yyyy'}}</p>
+  </div>
+  <div class="deadline">
+    <p>{{task.deadline | date: 'dd/MM/yyyy'}}</p>
+  </div>
+  <div class="status" *ngIf="task.status === 'Ожидает'">
+    <div class="waiting"></div>
+  </div>
+  <div class="status" *ngIf="task.status === 'Работа'">
+    <div class="in-work"></div>
+  </div>
+  <div class="status" *ngIf="task.status === 'Завершен'">
+    <div class="completed"></div>
+  </div>
+  <div class="action">
+    <button mat-icon-button color="primary" (click)="deleteTask(task.id)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

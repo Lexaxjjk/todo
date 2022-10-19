@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>{{data.title}}</h1>
+<h1 mat-dialog-title>{{ data.title }}</h1>
 <div mat-dialog-content>
-  {{data.content}}
+  {{ data.content }}
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Повторить</button>
-  <button mat-button (click)="redirectTo(data.path)" cdkFocusInitial>{{data.buttonNav}}</button>
+  <button mat-button (click)="redirectTo(data.path)"  cdkFocusInitial>{{ data.buttonNav }}</button>
 </div>

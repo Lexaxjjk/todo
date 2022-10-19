@@ -1,11 +1,10 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, filter, map, tap, takeUntil, take, Subject } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { ErrorPopupComponent } from '../popups/error-popup/error-popup.component';
-import { ComponentCanDeactivate } from './sing-up.guard';
 
 
 @Component({
@@ -13,12 +12,13 @@ import { ComponentCanDeactivate } from './sing-up.guard';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SingUpComponent implements OnInit, ComponentCanDeactivate {
+export class SingUpComponent implements OnInit {
   public signUpForm: FormGroup;
   public hide: { pass: boolean, confPass: boolean } = {
     pass: true,
     confPass: true
   };
+
   public Error: string;
   public errorMessage: string = 'Пользователь с указаным Email уже существует. Повторите регистрацию или выполните вход!'
 
@@ -43,24 +43,6 @@ export class SingUpComponent implements OnInit, ComponentCanDeactivate {
     return (this.signUpForm.get('confPass').hasError('minlength') || this.signUpForm.get('confPass').hasError('required')) && !this.signUpForm.get('confPass').hasError('custom')
   }
 
-  openDialog(enterAnimationDuration?: string, exitAnimationDuration?: string): void {
-    const dialogRef = this.dialog.open(ErrorPopupComponent, {
-      data: {
-        title: 'Ошибка регистрации',
-        content: 'Пользователь с указаным Email уже существует. Повторите регистрацию или выполните вход!',
-        buttonNav: 'Вход',
-        path: '/auth/sign-in'
-      },
-      width: '450px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.clear();
-    });
-  }
-
   public submit(): void {
     if (this.signUpForm.invalid) return;
 
@@ -82,11 +64,21 @@ export class SingUpComponent implements OnInit, ComponentCanDeactivate {
     }
   }
 
-  canDeactivate(): boolean | Observable<boolean> {
+  private openDialog(): void {
+    const dialogRef = this.dialog.open(ErrorPopupComponent, {
+      data: {
+        title: 'Ошибка регистрации',
+        content: 'Пользователь с указаным Email уже существует. Повторите регистрацию или выполните вход!',
+        buttonNav: 'Вход',
+        path: '/auth/sign-in'
+      },
+      width: '450px',
+    });
 
-    if (!this.signUpForm.getRawValue().firstName) {
-      return true;
-    }
-    return confirm("Вы хотите покинуть страницу? В этом случае все данные будут утеряны!");
+    dialogRef.afterClosed().pipe(
+      take(1)
+    ).subscribe(() => {
+      this.clear();
+    });
   }
 }

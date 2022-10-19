@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ITaskData } from './interfaces/task.interface';
+import { TaskService } from './services/task.service';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent  {
+  public userTasks: ITaskData[] = this.taskService.taskList
 
-  constructor() { }
+  constructor(
+    private taskService: TaskService
+  ) { }
 
-  ngOnInit(): void {
+  public deleteTask(taskId: number): void {
+    this.taskService.deleteTask(taskId);
   }
-
 }

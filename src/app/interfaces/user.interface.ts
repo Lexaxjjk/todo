@@ -10,11 +10,5 @@ export interface IAuthData {
     pass: string;
 }
 
-export interface DialogData {
-    title: string,
-    content: string,
-    buttonNav: string,
-    path: string
-  }
 
-  
+

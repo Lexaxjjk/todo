@@ -1,10 +1,4 @@
-:host {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 100%;
-    ::ng-deep router-outlet + * {
-    
-        flex: 1;
-    }
+.main-wrapper {
+  min-height: calc(100vh - 249px);
+  padding: 24px;
 }

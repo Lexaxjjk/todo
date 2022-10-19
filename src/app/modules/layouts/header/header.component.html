@@ -1,6 +1,12 @@
 <div class="header">
-    <p>header works!</p>
-    <a routerLink="auth/sign-up">Reg</a>
-    <a routerLink="auth/sign-in">VHOD</a>
-    <a routerLink="task-list">Task</a>
+  <div class="logo">
+    <img src="assets/images/logo.png" alt="logo222">
+  </div>
+    <div class="action auth-buttons">
+        <button *ngIf="!authCheck()" mat-button color="primary" class="log-in" (click)="redirectTo('auth/sign-in')">Вход</button>
+        <button *ngIf="!authCheck()" mat-button color="primary" class="log-out"(click)="redirectTo('auth/sign-up')">Регистрация</button>
+    </div>
+    <div class="action log-out-button">
+        <button *ngIf="authCheck()" mat-stroked-button color="primary" class="log-out"(click)="logOut()">Выход</button>
+    </div>
 </div>

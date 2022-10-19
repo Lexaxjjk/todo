@@ -1,1 +1,29 @@
-<p>task-list works!</p>
+<div class="wrapper">
+  <div class="title">
+    <div class="id">
+      <p>№</p>
+    </div>
+    <div class="description">
+      <p>Описание задачи</p>
+    </div>
+    <div class="start-date">
+      <p>Дата создания</p>
+    </div>
+    <div class="deadline">
+      <p>Дата завершения</p>
+    </div>
+    <div class="status">
+      <p>Статус</p>
+    </div>
+    <div class="action">
+      <p>Действия</p>
+    </div>
+  </div>
+
+  <div class="task-list">
+    <app-task *ngFor="let task of userTasks; let index = index" [task]="task" [index]="index"
+      (onDeleteTask)="deleteTask($event)"></app-task>
+  </div>
+  <app-add-task></app-add-task>
+
+</div>

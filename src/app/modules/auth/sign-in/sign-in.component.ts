@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup;
+  public hide: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,7 +42,7 @@ export class SignInComponent implements OnInit {
     this.router.navigate(['/auth/sign-up']);
   }
 
-  openDialog(enterAnimationDuration?: string, exitAnimationDuration?: string): void {
+  private openDialog(): void {
     const dialogRef = this.dialog.open(ErrorPopupComponent, {
       data: {
         title: 'Ошибка входа',
@@ -50,10 +51,8 @@ export class SignInComponent implements OnInit {
         path: '/auth/sign-up'
       },
       width: '450px',
-      enterAnimationDuration,
-      exitAnimationDuration,
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.signInForm.reset();
     });
   }

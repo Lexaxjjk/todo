@@ -6,11 +6,13 @@ import { UserService } from 'src/app/services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TaskListGuard implements CanActivate {
+
+export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
     private userService: UserService
+
   ) { }
 
 
@@ -18,10 +20,9 @@ export class TaskListGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.userService.currentUser) {
-      return true;
+      this.router.navigate(['/task-list']);
+      return false;
     }
-    this.router.navigate(['/auth/sign-in']);
-    return false;
+    return true;
   }
-  
 }
