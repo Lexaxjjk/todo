@@ -5,7 +5,7 @@ import { TaskService } from '../../services/task.service';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
-  styleUrls: ['./add-task.component.scss']
+  styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent implements OnInit {
   public addTaskForm: FormGroup;
@@ -14,19 +14,17 @@ export class AddTaskComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private taskService: TaskService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.addTaskForm = this.formBuilder.group({
-      description: ['', [Validators.maxLength(90),Validators.required]],
-      deadline: ['', Validators.required]
+      description: ['', [Validators.maxLength(90), Validators.required]],
+      deadline: ['', Validators.required],
     });
   }
+
   public addTask(): void {
-    // this.taskService.addTask
-    const {description, deadline} = this.addTaskForm.getRawValue();
+    const { description, deadline } = this.addTaskForm.getRawValue();
     this.taskService.addTask(description, deadline);
   }
-
-
 }

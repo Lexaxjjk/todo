@@ -5,8 +5,18 @@
     <div>
       <mat-form-field class="email-input sign-in-input" appearance="fill">
         <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" placeholder="Email">
-        <mat-error *ngIf="!signInForm.get('email').hasError('required') && signInForm.get('email').hasError('email')">
+        <input
+          type="email"
+          matInput
+          formControlName="email"
+          placeholder="Email"
+        />
+        <mat-error
+          *ngIf="
+            !signInForm.get('email').hasError('required') &&
+            signInForm.get('email').hasError('email')
+          "
+        >
           Неправильний формат email
         </mat-error>
         <mat-error *ngIf="signInForm.get('email').hasError('required')">
@@ -18,18 +28,40 @@
     <div>
       <mat-form-field class="pass-input sign-in-input" appearance="fill">
         <mat-label>Пароль</mat-label>
-        <input [type]="hide ? 'password' : 'text'" matInput formControlName="pass" placeholder="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <input
+          [type]="hide ? 'password' : 'text'"
+          matInput
+          formControlName="pass"
+          placeholder="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="signInForm.get('pass').hasError('minlength') || signInForm.get('pass').hasError('required')">
+        <mat-error
+          *ngIf="
+            signInForm.get('pass').hasError('minlength') ||
+            signInForm.get('pass').hasError('required')
+          "
+        >
           Пароль должен содержать не менее <strong> 6 </strong> символов!
         </mat-error>
       </mat-form-field>
     </div>
   </form>
   <div class="action">
-    <button mat-raised-button color="primary" (click)="submit()" [disabled]="signInForm.invalid">Войти</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+      [disabled]="signInForm.invalid"
+    >
+      Войти
+    </button>
   </div>
 </div>

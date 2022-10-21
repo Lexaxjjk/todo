@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { IAuthData, IUser } from '../interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class UserService {
   private users: IUser[];
   private user: IUser;
 
-  constructor() { }
+  constructor() {}
 
   public signUp(user: IUser): boolean {
     if (this.checkUser(user.email)) return false;
     this.userList.push(user);
     localStorage.setItem('users', JSON.stringify(this.userList));
-    return true
+    return true;
   }
 
   public signIn({ email, pass }: IAuthData): boolean {

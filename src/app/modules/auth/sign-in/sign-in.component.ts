@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
   public signInForm: FormGroup;
@@ -19,12 +19,12 @@ export class SignInComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   public ngOnInit(): void {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      pass: ['', [Validators.minLength(6), Validators.required]]
+      pass: ['', [Validators.minLength(6), Validators.required]],
     });
   }
 
@@ -32,8 +32,8 @@ export class SignInComponent implements OnInit {
     if (this.signInForm.invalid) return;
     const signInResult = this.userService.signIn(this.signInForm.getRawValue());
     if (!signInResult) {
-      this.openDialog()
-      return
+      this.openDialog();
+      return;
     }
     this.router.navigate(['/task-list']);
   }
@@ -46,9 +46,10 @@ export class SignInComponent implements OnInit {
     const dialogRef = this.dialog.open(ErrorPopupComponent, {
       data: {
         title: 'Ошибка входа',
-        content: 'Пользователь с указаным Email и паролем не существует. Повторите вход или выполните регистрацию!',
+        content:
+          'Пользователь с указаным Email и паролем не существует. Повторите вход или выполните регистрацию!',
         buttonNav: 'Регистрация',
-        path: '/auth/sign-up'
+        path: '/auth/sign-up',
       },
       width: '450px',
     });

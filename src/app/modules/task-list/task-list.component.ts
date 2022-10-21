@@ -5,14 +5,12 @@ import { TaskService } from './services/task.service';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.scss'],
 })
-export class TaskListComponent  {
-  public userTasks: ITaskData[] = this.taskService.taskList
+export class TaskListComponent {
+  public userTasks: ITaskData[] = this.taskService.taskList;
 
-  constructor(
-    private taskService: TaskService
-  ) { }
+  constructor(private taskService: TaskService) {}
 
   public deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId);

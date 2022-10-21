@@ -1,6 +1,6 @@
 export interface IErrorDialogData {
-    title: string;
-    content: string;
-    buttonNav: string;
-    path: string;
+  title: string;
+  content: string;
+  buttonNav: string;
+  path: string;
 }
