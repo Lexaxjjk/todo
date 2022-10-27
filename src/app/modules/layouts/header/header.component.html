@@ -4,7 +4,7 @@
   </div>
   <div class="action auth-buttons">
     <button
-      *ngIf="!authCheck()"
+      *ngIf="!authCheck"
       mat-button
       color="primary"
       class="log-in"
@@ -13,7 +13,7 @@
       Вход
     </button>
     <button
-      *ngIf="!authCheck()"
+      *ngIf="!authCheck"
       mat-button
       color="primary"
       class="log-out"
@@ -24,7 +24,7 @@
   </div>
   <div class="action log-out-button">
     <button
-      *ngIf="authCheck()"
+      *ngIf="authCheck"
       mat-stroked-button
       color="primary"
       class="log-out"

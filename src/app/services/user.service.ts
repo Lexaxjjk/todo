@@ -38,6 +38,10 @@ export class UserService {
     return this.user;
   }
 
+  public clearCurrentUser(): void {
+    this.user = null;
+  }
+
   private checkUser(email: string, password?: string): IUser {
     return this.userList?.find((user: IUser) => {
       if (password) return user.email === email && user.pass === password;
