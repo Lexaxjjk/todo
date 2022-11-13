@@ -1,4 +1,6 @@
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { enterAnimation, leaveAnimation } from '../../animations/task.animations';
 import { ITaskData } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
 
@@ -6,6 +8,17 @@ import { TaskService } from '../../services/task.service';
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
+  animations: [
+    trigger('todoItem', [
+      transition(':enter', [
+        useAnimation(enterAnimation)
+      ]),
+      transition(':leave', [
+        useAnimation(leaveAnimation)
+      ])
+    ])
+  ]
+
 })
 export class TaskComponent implements OnInit{
   @Input() public task: ITaskData;

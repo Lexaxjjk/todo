@@ -1,11 +1,24 @@
+import { animateChild, query, transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { enterAnimation, leaveAnimation } from '../../animations/task.animations';
 import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss'],
+  animations: [
+    trigger('todoItem', [
+      transition(':enter', [
+        useAnimation(enterAnimation)
+      ]),
+      transition(':leave', [
+        useAnimation(leaveAnimation)
+      ])
+    ])
+  ]
+
 })
 export class AddTaskComponent implements OnInit {
   public addTaskForm: FormGroup;
@@ -29,4 +42,6 @@ export class AddTaskComponent implements OnInit {
     this.addTaskForm.reset();
     this.showForm = !this.showForm;
   }
+
+
 }

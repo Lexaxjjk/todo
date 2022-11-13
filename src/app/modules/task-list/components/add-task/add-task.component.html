@@ -11,7 +11,7 @@
     </button>
   </ng-container>
 </div>
-<form *ngIf="showForm === true" class="add-task-form" [formGroup]="addTaskForm">
+<form *ngIf="showForm === true" [@todoItem] class="add-task-form" [formGroup]="addTaskForm">
   <div class="inputs">
     <mat-form-field class="add-task-input" appearance="fill">
       <mat-label>Описание задачи</mat-label>

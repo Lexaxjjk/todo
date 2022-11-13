@@ -23,6 +23,7 @@
   <div class="task-list">
     <app-task
       *ngFor="let task of userTasks; let index = index"
+      [@todoItem]
       [task]="task"
       [index]="index"
       (onDeleteTask)="deleteTask($event)"
