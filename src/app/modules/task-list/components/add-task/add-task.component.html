@@ -1,10 +1,5 @@
 <div class="action">
-  <button
-    *ngIf="showForm === false"
-    mat-raised-button
-    color="primary"
-    (click)="showForm = !showForm"
-  >
+  <button *ngIf="showForm === false" mat-raised-button color="primary" (click)="showForm = !showForm">
     Добавить задачу
   </button>
   <ng-container *ngIf="showForm === true">

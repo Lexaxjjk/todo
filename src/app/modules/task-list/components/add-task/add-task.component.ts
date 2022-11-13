@@ -26,5 +26,7 @@ export class AddTaskComponent implements OnInit {
   public addTask(): void {
     const { description, deadline } = this.addTaskForm.getRawValue();
     this.taskService.addTask(description, deadline);
+    this.addTaskForm.reset();
+    this.showForm = !this.showForm;
   }
 }

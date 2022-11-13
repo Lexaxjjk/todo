@@ -39,4 +39,10 @@ export class TaskService {
     }
     return this.tasks || [];
   }
+
+  public editTask(id: number, text: string): void {
+    this.tasks = this.tasks || this.taskList;
+    this.tasks.find((task: ITaskData) => task.id === id).text = text;
+    localStorage.setItem(this.currentUser.email, JSON.stringify(this.tasks));
+  }
 }
