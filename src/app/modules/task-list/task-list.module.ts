@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TaskComponent } from './components/task/task.component';
 import { MatIconModule } from '@angular/material/icon';
 import { StatusColorDirective } from './directives/status-color.directive';
+import { DateTransformPipe } from './pipes/date-transform.pipe';
 
 
 
@@ -17,7 +18,8 @@ import { StatusColorDirective } from './directives/status-color.directive';
     TaskListComponent,
     AddTaskComponent,
     TaskComponent,
-    StatusColorDirective
+    StatusColorDirective,
+    DateTransformPipe
   ],
   imports: [
     CommonModule,
