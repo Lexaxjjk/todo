@@ -7,10 +7,10 @@
       <p>Описание задачи</p>
     </div>
     <div class="start-date">
-      <p>Добавлена</p>
+      <p>Добавлено</p>
     </div>
     <div class="deadline">
-      <p>Дата завершения</p>
+      <p>Дедлайн</p>
     </div>
     <div class="status">
       <p>Статус</p>
@@ -29,5 +29,5 @@
       (onDeleteTask)="deleteTask($event)"
     ></app-task>
   </div>
-  <app-add-task></app-add-task>
+  <app-add-task (onAddTask)="addTask()"></app-add-task>
 </div>

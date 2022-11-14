@@ -1,5 +1,5 @@
 import { animateChild, query, transition, trigger, useAnimation } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { enterAnimation, leaveAnimation } from '../../animations/task.animations';
 import { TaskService } from '../../services/task.service';
@@ -21,8 +21,10 @@ import { TaskService } from '../../services/task.service';
 
 })
 export class AddTaskComponent implements OnInit {
+  @Output() private onAddTask: EventEmitter<void> = new EventEmitter<void>();
   public addTaskForm: FormGroup;
   public showForm: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +43,7 @@ export class AddTaskComponent implements OnInit {
     this.taskService.addTask(description, deadline);
     this.addTaskForm.reset();
     this.showForm = !this.showForm;
+    this.onAddTask.emit();
   }
 
 

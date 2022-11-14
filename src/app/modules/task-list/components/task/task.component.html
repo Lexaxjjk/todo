@@ -6,13 +6,21 @@
     <p>{{ task.text }}</p>
   </div>
   <div class="start-date">
-    <p>{{ task.startDate | dateTransform }}</p>
+    <p>{{ task.startDate | dateTransform: today }}</p>
   </div>
   <div class="deadline">
     <p>{{ task.deadline | date: "dd/MM/yyyy" }}</p>
   </div>
   <div class="status-container">
-    <div appStatusColor [status]="task.status"></div>
+    <div
+    appStatusColor
+    [status]="task.status"
+    #tooltip="matTooltip"
+    [matTooltip]="task.status | statusTextTransform"
+    matTooltipPosition="above"
+    matTooltipHideDelay="200"
+    (click)="changeStatus(task.id)"
+    ></div>
   </div>
   <div class="action">
     <button mat-icon-button color="primary" (click)="showEditForm = !showEditForm">

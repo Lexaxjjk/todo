@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dateTransform',
 })
 export class DateTransformPipe implements PipeTransform {
-  transform(value: Date): string {
+  transform(value: Date, today: number): string {
     const msecPerMinute = 1000 * 60; // милисекунд в минуте
     const msecPerHour = msecPerMinute * 60; // милисекунд в часе
     const msecPerDay = msecPerHour * 24; // милисекунд в дне
@@ -12,10 +12,9 @@ export class DateTransformPipe implements PipeTransform {
     const msecPerMonth = msecPerDay * 30; // милисекунд в месяце
     const msecPerYear = msecPerMonth * 12; // милисекунд в году
 
-    const today = new Date();
     const startDate = new Date(value);
 
-    let interval = today.getTime() - startDate.valueOf();
+    let interval = new Date(today).getTime() - startDate.valueOf();
 
     const year = Math.floor(interval / msecPerYear);
     interval = interval - year * msecPerYear;
@@ -35,33 +34,26 @@ export class DateTransformPipe implements PipeTransform {
     const minutes = Math.floor(interval / msecPerMinute);
     interval = interval - minutes * msecPerMinute;
 
-    if (year !== 0) {
-      return this.add_s(year, ' year');
+    if (year) {
+      return `${year} год`;
     }
-    if (month !== 0) {
-      return this.add_s(month, ' month');
+    if (month) {
+      return `${month} мес.`;
     }
-    if (week !== 0) {
-      return this.add_s(week, ' week');
+    if (week) {
+      return `${week} нед.`;
     }
-    if (days !== 0) {
-      return this.add_s(days, ' day');
+    if (days) {
+      return `${days} д.`;
     }
-    if (hours !== 0) {
-      return this.add_s(hours, ' hour');
+    if (hours) {
+      return `${hours} ч.`;
     }
-    if (minutes !== 0) {
-      return this.add_s(minutes, ' min');
+    if (minutes) {
+      return `${minutes} мин.`;
     }
-    return '0s'
+    return 'Только что'
   }
 
-  add_s(data_number: number, text: string) {
-    switch (data_number) {
-      case 1:
-        return data_number + text;
-      default:
-        return data_number + text + 's';
-    }
-  }
+
 }

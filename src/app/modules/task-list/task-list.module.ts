@@ -10,6 +10,9 @@ import { TaskComponent } from './components/task/task.component';
 import { MatIconModule } from '@angular/material/icon';
 import { StatusColorDirective } from './directives/status-color.directive';
 import { DateTransformPipe } from './pipes/date-transform.pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { StatusTextTransformPipe } from './pipes/status-text-transform.pipe';
+
 
 
 
@@ -19,7 +22,8 @@ import { DateTransformPipe } from './pipes/date-transform.pipe';
     AddTaskComponent,
     TaskComponent,
     StatusColorDirective,
-    DateTransformPipe
+    DateTransformPipe,
+    StatusTextTransformPipe
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,8 @@ import { DateTransformPipe } from './pipes/date-transform.pipe';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class TaskListModule { }

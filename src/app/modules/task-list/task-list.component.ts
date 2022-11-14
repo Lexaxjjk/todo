@@ -27,6 +27,9 @@ export class TaskListComponent {
   public deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId);
     this.userTasks = this.taskService.taskList;
-    console.log('user', taskId)
+  }
+
+  public addTask(): void {
+    this.userTasks = this.taskService.taskList;
   }
 }
