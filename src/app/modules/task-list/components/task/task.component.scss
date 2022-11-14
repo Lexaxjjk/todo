@@ -37,31 +37,17 @@
     width: 10%;
   }
 
-  .status {
+  .status-container {
     width: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     div {
-      width: 20px;
-      height: 20px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
-    }
-
-    .waiting {
-      border: 1px solid rgb(115, 102, 0);
-      background-color: rgb(245, 217, 0);
-    }
-
-    .in-work {
-      border: 1px solid rgb(0, 42, 109);
-      background-color: rgb(0, 98, 255);
-    }
-
-    .completed {
-      border: 1px solid rgb(26, 99, 0);
-      background-color: rgb(49, 185, 0);
+      border: 1px solid;
     }
   }
 
@@ -82,8 +68,8 @@
 
       mat-icon {
         display: block;
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
       }
     }
   }

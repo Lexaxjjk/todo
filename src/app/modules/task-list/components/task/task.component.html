@@ -11,14 +11,8 @@
   <div class="deadline">
     <p>{{ task.deadline | date: "dd/MM/yyyy" }}</p>
   </div>
-  <div class="status" *ngIf="task.status === 'Ожидает'">
-    <div class="waiting"></div>
-  </div>
-  <div class="status" *ngIf="task.status === 'Работа'">
-    <div class="in-work"></div>
-  </div>
-  <div class="status" *ngIf="task.status === 'Завершен'">
-    <div class="completed"></div>
+  <div class="status-container">
+    <div appStatusColor [status]="task.status"></div>
   </div>
   <div class="action">
     <button mat-icon-button color="primary" (click)="showEditForm = !showEditForm">
@@ -32,10 +26,9 @@
 <div *ngIf="showEditForm" [@todoItem] class="add-task">
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Описание задачи</mat-label>
-    <input matInput type="text" [(ngModel)]="taskValue">
+    <input matInput type="text" [(ngModel)]="taskValue" />
     <button matSuffix mat-icon-button (click)="editTask(task.id)">
       <mat-icon>done</mat-icon>
     </button>
   </mat-form-field>
-
 </div>

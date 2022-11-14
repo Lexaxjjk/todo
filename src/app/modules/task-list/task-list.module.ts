@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { TaskComponent } from './components/task/task.component';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StatusColorDirective } from './directives/status-color.directive';
 
 
 
@@ -16,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     TaskListComponent,
     AddTaskComponent,
-    TaskComponent
+    TaskComponent,
+    StatusColorDirective
   ],
   imports: [
     CommonModule,
