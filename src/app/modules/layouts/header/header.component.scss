@@ -1,0 +1,20 @@
+.header {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(155, 155, 155, 0.4);
+  border-end-end-radius: 50px;
+
+  .action {
+    button {
+      color: maroon;
+      background-color: rgb(155, 155, 155, 0.2);
+    }
+  }
+
+  img {
+    width: 40%;
+  }
+}

@@ -1,0 +1,36 @@
+<div class="header">
+  <div class="logo">
+    <img src="assets/images/logo.png" alt="logo" />
+  </div>
+  <div class="action auth-buttons">
+    <button
+      *ngIf="!authCheck"
+      mat-button
+      color="primary"
+      class="log-in"
+      (click)="redirectTo('auth/sign-in')"
+    >
+      Вход
+    </button>
+    <button
+      *ngIf="!authCheck"
+      mat-button
+      color="primary"
+      class="log-out"
+      (click)="redirectTo('auth/sign-up')"
+    >
+      Регистрация
+    </button>
+  </div>
+  <div class="action log-out-button">
+    <button
+      *ngIf="authCheck"
+      mat-stroked-button
+      color="primary"
+      class="log-out"
+      (click)="logOut()"
+    >
+      Выход
+    </button>
+  </div>
+</div>
