@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Подтвердите выполнение задачи</h2>
+<mat-dialog-content class="mat-typography">
+  <p>Вы подтверждаете что задача выполнена и вы хотите сменить ее статус на "Успешно"?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Отменить</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Подтвердить</button>
+</mat-dialog-actions>

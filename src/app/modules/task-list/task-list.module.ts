@@ -12,6 +12,8 @@ import { StatusColorDirective } from './directives/status-color.directive';
 import { DateTransformPipe } from './pipes/date-transform.pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StatusTextTransformPipe } from './pipes/status-text-transform.pipe';
+import { ConfirmPopupComponent } from './components/popups/confirm-popup/confirm-popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -23,7 +25,8 @@ import { StatusTextTransformPipe } from './pipes/status-text-transform.pipe';
     TaskComponent,
     StatusColorDirective,
     DateTransformPipe,
-    StatusTextTransformPipe
+    StatusTextTransformPipe,
+    ConfirmPopupComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ import { StatusTextTransformPipe } from './pipes/status-text-transform.pipe';
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ]
 })
 export class TaskListModule { }

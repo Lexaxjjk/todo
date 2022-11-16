@@ -1,19 +1,12 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
-import { interval, Subject, takeUntil, timer } from 'rxjs';
-import {
-  enterAnimation,
-  leaveAnimation,
-} from '../../animations/task.animations';
+import { DialogRef } from '@angular/cdk/dialog';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { interval, Subject, take, takeUntil, timer } from 'rxjs';
+import { enterAnimation, leaveAnimation } from '../../animations/task.animations';
 import { ITaskData } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
+import { ConfirmPopupComponent } from '../popups/confirm-popup/confirm-popup.component';
 
 @Component({
   selector: 'app-task',
@@ -37,7 +30,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   public today: number = new Date().valueOf();
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, public dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.taskValue = this.task.text;
@@ -66,6 +59,19 @@ export class TaskComponent implements OnInit, OnDestroy {
 
     this.taskService.changeStatus(id, 'completed');
     this.task.status = 'completed';
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ConfirmPopupComponent);
+
+    dialogRef
+    .afterClosed()
+    .pipe(take(1))
+    .subscribe((result) => {
+      if (result) {
+        this.changeStatus(this.task.id);
+      }
+    });
   }
 
   public ngOnDestroy(): void {
