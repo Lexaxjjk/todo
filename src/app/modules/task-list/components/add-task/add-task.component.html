@@ -1,5 +1,10 @@
 <div class="action">
-  <button *ngIf="showForm === false" mat-raised-button color="primary" (click)="showForm = !showForm">
+  <button
+    *ngIf="showForm === false"
+    mat-raised-button
+    color="primary"
+    (click)="showForm = !showForm"
+  >
     Добавить задачу
   </button>
   <ng-container *ngIf="showForm === true">
@@ -11,7 +16,12 @@
     </button>
   </ng-container>
 </div>
-<form *ngIf="showForm === true" [@todoItem] class="add-task-form" [formGroup]="addTaskForm">
+<form
+  *ngIf="showForm === true"
+  [@todoItem]
+  class="add-task-form"
+  [formGroup]="addTaskForm"
+>
   <div class="inputs">
     <mat-form-field class="add-task-input" appearance="fill">
       <mat-label>Описание задачи</mat-label>
@@ -21,6 +31,12 @@
         formControlName="description"
         placeholder="Описание"
       />
+      <mat-error *ngIf="addTaskForm.get('description').hasError('required')">
+        Поле не может быть пустым!
+      </mat-error>
+      <mat-error *ngIf="addTaskForm.get('description').hasError('maxLength')">
+        Поле может содержать не больше 90 символов!
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="add-task-input" appearance="fill">
@@ -31,6 +47,14 @@
         formControlName="deadline"
         placeholder="Кол-во дней"
       />
+      <mat-error
+        *ngIf="
+          addTaskForm.get('deadline').hasError('required') ||
+          addTaskForm.get('deadline').hasError('min')
+        "
+      >
+        Поле не может быть пустым или иметь отрицательное значение!
+      </mat-error>
     </mat-form-field>
   </div>
 </form>

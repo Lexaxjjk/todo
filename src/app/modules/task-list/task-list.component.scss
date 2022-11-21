@@ -12,18 +12,22 @@
   box-sizing: border-box;
 
   .title {
-    padding: 25px 0;
+    padding: 25px;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
     flex-direction: row;
     background-color: rgba(155, 155, 155, 0.2);
+
+    @media (max-width: 650px) {
+      display: none;
+    }
 
     div {
       display: flex;
       align-items: stretch;
-      justify-content: center;
+      justify-content: start;
       height: 35px;
 
       p {
@@ -38,17 +42,17 @@
 
     .description {
       min-width: 200px;
-      width: 50%;
+      width: 40%;
     }
 
     .start-date {
       min-width: 50px;
-      width: 10%;
+      width: 15%;
     }
 
     .deadline {
       min-width: 50px;
-      width: 10%;
+      width: 15%;
     }
 
     .status {
@@ -68,8 +72,10 @@
     align-items: center;
     flex-direction: column;
 
-    :nth-child(2n) {
-      background-color: rgba(155, 155, 155, 0.2);
+    @media (min-width: 651px) {
+      :nth-child(2n) {
+        background-color: rgba(155, 155, 155, 0.2);
+      }
     }
   }
 }

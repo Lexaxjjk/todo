@@ -10,14 +10,10 @@ import { TaskService } from './services/task.service';
   styleUrls: ['./task-list.component.scss'],
   animations: [
     trigger('todoItem', [
-      transition(':enter', [
-        useAnimation(enterAnimation)
-      ]),
-      transition(':leave', [
-        useAnimation(leaveAnimation)
-      ])
-    ])
-  ]
+      transition(':enter', [useAnimation(enterAnimation)]),
+      transition(':leave', [useAnimation(leaveAnimation)]),
+    ]),
+  ],
 })
 export class TaskListComponent {
   public userTasks: ITaskData[] = this.taskService.taskList;

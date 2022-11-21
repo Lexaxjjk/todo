@@ -1,29 +1,48 @@
 <div class="task-container">
   <div class="id">
-    <p>{{ index + 1 }}</p>
+    <p><span class="mobile-view">Задача </span> {{ index + 1 }}</p>
   </div>
   <div class="description">
     <p>{{ task.text }}</p>
   </div>
   <div class="start-date">
+    <p class="mobile-view">Задача создана</p>
     <p>{{ task.startDate | dateTransform: today }}</p>
   </div>
   <div class="deadline">
+    <p class="mobile-view">Завершить до</p>
     <p>{{ task.deadline | date: "dd/MM/yyyy" }}</p>
   </div>
   <div class="status-container">
-    <div
-    appStatusColor
-    [status]="task.status"
-    #tooltip="matTooltip"
-    [matTooltip]="task.status | statusTextTransform"
-    matTooltipPosition="above"
-    matTooltipHideDelay="200"
-    (click)="openDialog()"
-    ></div>
+    <div class="status">
+      <p class="mobile-view">Статус</p>
+      <div
+        class="status-circle"
+        appStatusColor
+        [status]="task.status"
+        (click)="openDialog()"
+      ></div>
+    </div>
+    <div class="mobile-view">{{ task.status | statusTextTransform }}</div>
   </div>
-  <div class="action">
-    <button mat-icon-button color="primary" (click)="showEditForm = !showEditForm">
+  <div class="mobile-action">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="showEditForm = !showEditForm"
+    >
+      Изменить
+    </button>
+    <button mat-raised-button color="warn" (click)="deleteTask(task.id)">
+      Удалить
+    </button>
+  </div>
+  <div class="desktop-action">
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="showEditForm = !showEditForm"
+    >
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button color="warn" (click)="deleteTask(task.id)">
@@ -32,10 +51,25 @@
   </div>
 </div>
 <div *ngIf="showEditForm" [@todoItem] class="add-task">
-  <mat-form-field class="example-form-field" appearance="fill">
+  <mat-form-field
+    class="edit-task-form"
+    [formGroup]="editTaskForm"
+    appearance="fill"
+  >
     <mat-label>Описание задачи</mat-label>
-    <input matInput type="text" [(ngModel)]="taskValue" />
-    <button matSuffix mat-icon-button (click)="editTask(task.id)">
+    <input matInput type="text" formControlName="text" />
+    <mat-error *ngIf="editTaskForm.get('text').hasError('required')">
+      Поле не может быть пустым
+    </mat-error>
+    <mat-error *ngIf="editTaskForm.get('text').hasError('maxlength')">
+      Поле может содержать не больше 90 символов!
+    </mat-error>
+    <button
+      matSuffix
+      mat-icon-button
+      (click)="editTask(task.id)"
+      [disabled]="editTaskForm.invalid"
+    >
       <mat-icon>done</mat-icon>
     </button>
   </mat-form-field>

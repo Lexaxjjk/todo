@@ -1,8 +1,8 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { interval, Subject, take, takeUntil, timer } from 'rxjs';
+import { filter, interval, Subject, take, takeUntil, timer } from 'rxjs';
 import { enterAnimation, leaveAnimation } from '../../animations/task.animations';
 import { ITaskData } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/task.service';
@@ -28,9 +28,14 @@ export class TaskComponent implements OnInit, OnDestroy {
   public taskStatus: string;
   public showEditForm: boolean = false;
   public today: number = new Date().valueOf();
+  public editTaskForm: FormGroup;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private taskService: TaskService, public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private taskService: TaskService,
+    private formBuilder: FormBuilder
+  ) {}
 
   public ngOnInit(): void {
     this.taskValue = this.task.text;
@@ -43,6 +48,10 @@ export class TaskComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.today = new Date().valueOf();
       });
+
+    this.editTaskForm = this.formBuilder.group({
+      text: [this.task.text, [Validators.required, Validators.maxLength(90)]],
+    });
   }
 
   public deleteTask(taskId: number): void {
@@ -50,7 +59,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   public editTask(id: number): void {
-    this.taskService.editTask(id, this.taskValue);
+    this.taskService.editTask(id, this.editTaskForm.value.text);
     this.showEditForm = !this.showEditForm;
   }
 
@@ -61,17 +70,18 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.task.status = 'completed';
   }
 
-  openDialog() {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(ConfirmPopupComponent);
 
     dialogRef
-    .afterClosed()
-    .pipe(take(1))
-    .subscribe((result) => {
-      if (result) {
+      .afterClosed()
+      .pipe(
+        take(1),
+        filter((result: boolean) => result)
+      )
+      .subscribe(() => {
         this.changeStatus(this.task.id);
-      }
-    });
+      });
   }
 
   public ngOnDestroy(): void {

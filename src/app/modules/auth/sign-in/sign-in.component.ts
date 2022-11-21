@@ -15,10 +15,10 @@ export class SignInComponent implements OnInit {
   public hide: boolean = true;
 
   constructor(
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router,
-    public dialog: MatDialog
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
